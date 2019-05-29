@@ -1,34 +1,34 @@
 const colorService = require('./services/color-service');
 
 $(document).ready(() => {
-    $('#searchBtn').on('click', () => {
-        let searchText = $('#search').val();
+  $('#searchBtn').on('click', () => {
+    const searchText = $('#search').val();
 
-        colorService
-            .searchColors(searchText)
-            .then((results) => {
-                const paletteTemplate = $('#paletteTemplate');
-                const output = $('#output');
+    colorService
+      .searchColors(searchText)
+      .then((results) => {
+        const paletteTemplate = $('#paletteTemplate');
+        const output = $('#output');
 
-                results.forEach((palette) => {
-                    let paletteHtml = paletteTemplate.html().trim();
-                    let $palette = $(paletteHtml);
+        results.forEach((palette) => {
+          const paletteHtml = paletteTemplate.html().trim();
+          const $palette = $(paletteHtml);
 
-                    //TODO: Update palette name, and author
-                    let $image = $palette.find('.palette-image');
-                    $image.attr('src', palette.imageUrl);
+          // TODO: Update palette name, and author
+          const $image = $palette.find('.palette-image');
+          $image.attr('src', palette.imageUrl);
 
-                    let $name = $palette.find('.palette-name');
-                    $name.text(palette.title);
+          const $name = $palette.find('.palette-name');
+          $name.text(palette.title);
 
-                    let $author = $palette.find('.palette-author');
-                    $author.text(palette.userName);
+          const $author = $palette.find('.palette-author');
+          $author.text(palette.userName);
 
-                    output.append($palette);
-                })
-                    .catch((err) => {
-                        console.error(err);
-                    });
-            });
-    });
+          output.append($palette);
+        })
+          .catch((err) => {
+            console.error(err);
+          });
+      });
+  });
 });
