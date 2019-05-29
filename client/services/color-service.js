@@ -11,6 +11,7 @@ function getColors() {
 
 function searchColors(query, filters = {}) {
     let queryParams = [];
+    /*eslint-disable-next-line*/
     for(let key in filters){
         queryParams.push(`${key}=${filters[key]}`);
     }
