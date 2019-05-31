@@ -10,7 +10,7 @@ working_directory: ~/webapp
 jobs:
   install-dependencies:
     executor: node-executor
-working_directory: ~/webapp
+    working_directory: ~/webapp
     steps:
       - checkout
       - restore_cache:
