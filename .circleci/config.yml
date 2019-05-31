@@ -19,9 +19,9 @@ jobs:
             - v1-dependencies-
       - run: npm install
 
-            - persist_to_workspace:
-                root: ~/webapp
-                paths:
+      - persist_to_workspace:
+          root: ~/webapp
+          paths:
       - node_modules
 
       - save_cache:
