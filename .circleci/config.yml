@@ -3,7 +3,7 @@ version: 2.1
 executors:
   node-executor:
     docker:
-    - image: circleci/node:11.6.0
+      - image: circleci/node:11.6.0
 working_directory: ~/webapp
 
 
@@ -43,14 +43,14 @@ workflows:
           filters:
             branches:
               only: master
+      - build-client-github:
+        requires:
+          - install-dependencies
+          - deploy-github
+        filters:
+          branches:
+            only: master
+    requires:
       - build-client-github
-      requires:
-        - install-dependencies
-      - deploy-github
-      requires:
-        - build-client-github
-        - lint
-        - test
-       filters:
-        branches:
-          only: master
+      - lint
+      - test
