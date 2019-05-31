@@ -4,13 +4,13 @@ executors:
   node-executor:
     docker:
       - image: circleci/node:11.6.0
-    working_directory: ~/webapp
+    working_directory: "~/webapp"
 
 
 jobs:
   install-dependencies:
     executor: node-executor
-    working_directory: ~/webapp
+    working_directory: "~/webapp"
     steps:
       - checkout
       - restore_cache:
