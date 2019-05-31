@@ -40,9 +40,9 @@ workflows:
       - lint:
           requires:
             - install-dependencies
-            filters:
-              branches:
-                only: master
+          filters:
+            branches:
+              only: master
       - build-client-github
           requires:
             - install-dependencies
