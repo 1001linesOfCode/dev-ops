@@ -48,7 +48,9 @@ workflows:
     github_pipeline:
         jobs:
             - install-dependencies
-            - "lint\nrequires:\n  - install-dependencies"
-            - "test\nrequires:\n  - install-dependencies"
-
-
+            - lint:
+                requires:
+                  - install-dependencies
+            - test:
+                requires:
+                  - install-dependencies
