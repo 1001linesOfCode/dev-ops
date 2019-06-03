@@ -4,13 +4,13 @@ executors:
   node-executor:
     docker:
       - image: circleci/node:11.6.0
-    working_directory: "~/webapp"
+    working_directory: ~/webapp
 
 
 jobs:
   install-dependencies:
     executor: node-executor
-    working_directory: "~/webapp"
+    working_directory: ~/webapp
     steps:
       - checkout
       - restore_cache:
@@ -22,35 +22,33 @@ jobs:
       - persist_to_workspace:
           root: ~/webapp
           paths:
-      - node_modules
+            - node_modules
 
       - save_cache:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
 
+  lint:
+    executor: node-executor
+    working_directory: ~/webapp
+    steps:
+      - checkout
+      - attach_workspace:
+        at: ~/webapp
+      - run: npm run lint
+
+  test:
+    executor: node-executor
+    working_directory: ~/webapp
+
+
 workflows:
-  version: 2
-  github_pipeline:
-    jobs:
-      - install-dependencies
-      - test:
-          requires:
+    version: 2
+    github_pipeline:
+        jobs:
             - install-dependencies
-      - lint:
-          requires:
-            - install-dependencies
-          filters:
-            branches:
-              only: master
-      - build-client-github:
-        requires:
-          - install-dependencies
-          - deploy-github
-        filters:
-          branches:
-            only: master
-    requires:
-      - build-client-github
-      - lint
-      - test
+            - "lint\nrequires:\n  - install-dependencies"
+            - "test\nrequires:\n  - install-dependencies"
+
+
