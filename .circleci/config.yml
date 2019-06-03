@@ -35,7 +35,7 @@ jobs:
     steps:
       - checkout
       - attach_workspace:
-        at: ~/webapp
+          at: ~/webapp
       - run: npm run lint
 
   test:
@@ -44,7 +44,7 @@ jobs:
     steps:
       - checkout
       - attach_workspace:
-        at: ~/webapp
+          at: ~/webapp
       - run: npm run test
 
 
