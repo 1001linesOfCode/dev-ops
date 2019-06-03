@@ -41,6 +41,11 @@ jobs:
   test:
     executor: node-executor
     working_directory: ~/webapp
+    steps:
+      - checkout
+      - attach_workspace:
+        at: ~/webapp
+      - run: npm run test
 
 
 workflows:
